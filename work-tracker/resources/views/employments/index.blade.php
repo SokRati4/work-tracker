@@ -12,12 +12,12 @@
             {{ session('error') }}
         </div>
     @endif
-    <h1>Lista Pracowników</h1>
+    <h1>Lista umów</h1>
 
     <ul>
-        @foreach ($employees as $employee)
+        @foreach ($employments as $employment)
             <li>
-                <a href="{{ route('employees.employee', $employee->id) }}" >{{ $employee->login }} - {{ $employee->email }}</a>
+                <a href="{{ route('employments.details', $employment->id) }}" >{{ $employment->user->first_name }} - {{ $employment->start_date }}</a>
             </li>
         @endforeach
     </ul>
