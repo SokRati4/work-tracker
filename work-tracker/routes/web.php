@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\EmploymentController;
+use App\Http\Controllers\WorkdayController;
 use App\Http\Middleware\CheckAcceptedMiddleware;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckAdministrationMiddleware;
@@ -34,6 +35,8 @@ Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
     Route::post('/employments/store-employment', [EmploymentController::class, 'storeEmployment'])->name('employments.store-employment');
     Route::get('/employments', [EmploymentController::class, 'index'])->name('employments.index');
     Route::get('/employments/{id}/details', [EmploymentController::class, 'details'])->name('employments.details');
+    Route::get('/workdays/{id}/{month}/{year}/work-month', [WorkdayController::class, 'workMonth'])->name('workdays.work-month');
+    Route::post('/workdays/update', [WorkdayController::class, 'update'])->name('workdays.update');
 });
 
 Route::middleware([CheckAdminMiddleware::class])->group(function () {

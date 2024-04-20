@@ -47,10 +47,12 @@ class EmployeeController extends Controller
             // Dodajemy miesiące do tablicy
             for ($i = 0; $i <= $numMonths; $i++) {
                 $currentMonth = $startDateTime->format('m');
+                $currentYear = $startDateTime->format('Y');
                 $currentMonthName = $startDateTime->format('F');
 
                 if ($startDateTime->format('Y-m') <= now()->format('Y-m')) {
-                    $months[$currentMonth] = $currentMonthName;
+                    // Klucz w postaci "miesiąc-rok", wartość to nazwa miesiąca
+                    $months["$currentMonth-$currentYear"] = $currentMonthName;
                 }
 
                 // Przechodzimy do następnego miesiąca
