@@ -6,7 +6,7 @@
 
     <ul>
         @foreach ($employees as $employee)
-            <li>{{ $employee->name }} - {{ $employee->email }}</li>
+            <li>{{ $employee->login }} - {{ $employee->email }}</li>
         @endforeach
     </ul>
     </div>
