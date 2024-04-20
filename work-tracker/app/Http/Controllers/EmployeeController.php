@@ -22,16 +22,23 @@ class EmployeeController extends Controller
         $employments = Employment::where('id_user', $id)->get();
         $months = [];
 
+        $currentEmployment = Employment::where('id_user', $id)
+        ->where(function ($query) {
+            $query->where('end_date', '>=', now()) // Umowa kończy się po dzisiejszej dacie
+                  ->orWhereNull('end_date'); // Umowa nie ma ustalonej daty zakończenia
+        })
+        ->first();
+
         foreach ($employments as $employment) {
               // Pobieramy daty z umowy
             $startDate = $employment->start_date;
-            $endDate = $employment->end_date;
+            $endDate = $employment->end_date ? $employment->end_date : now()->format('Y-m-d');
 
             // Tworzymy obiekt daty dla start_date
             $startDateTime = new \DateTime($startDate);
 
             // Sprawdzamy, czy end_date jest ustawione, jeśli nie to bierzemy dzisiaj
-            $endDateTime = $endDate ? new \DateTime($endDate) : new \DateTime();
+            $endDateTime = new \DateTime($endDate);
 
             // Pobieramy różnicę w miesiącach między datami
             $interval = $startDateTime->diff($endDateTime);
@@ -42,7 +49,9 @@ class EmployeeController extends Controller
                 $currentMonth = $startDateTime->format('m');
                 $currentMonthName = $startDateTime->format('F');
 
-                $months[$currentMonth] = $currentMonthName;
+                if ($startDateTime->format('Y-m') <= now()->format('Y-m')) {
+                    $months[$currentMonth] = $currentMonthName;
+                }
 
                 // Przechodzimy do następnego miesiąca
                 $startDateTime->modify('+1 month');
@@ -56,6 +65,7 @@ class EmployeeController extends Controller
         return view('employees.employee', [
             'employee' => $employee,
             'uniqueMonths' => $uniqueMonths,
+            'currentEmployment' => $currentEmployment,
         ]);
     }
 }

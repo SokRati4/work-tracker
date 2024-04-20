@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\EmploymentController;
 use App\Http\Middleware\CheckAcceptedMiddleware;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckAdministrationMiddleware;
@@ -29,6 +30,10 @@ Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
     Route::put('/accounts/{id}', [AccountController::class, 'update'])->name('accounts.update');
     Route::post('/accounts/{id}/change-role', [AccountController::class, 'changeRole'])->name('accounts.change-role');
     Route::get('/employees/{id}/employee', [EmployeeController::class, 'employee'])->name('employees.employee');
+    Route::get('/employments/{id}/create-employment', [EmploymentController::class, 'createEmployment'])->name('employments.create-employment');
+    Route::post('/employments/store-employment', [EmploymentController::class, 'storeEmployment'])->name('employments.store-employment');
+    Route::get('/employments', [EmploymentController::class, 'index'])->name('employments.index');
+    Route::get('/employments/{id}/details', [EmploymentController::class, 'details'])->name('employments.details');
 });
 
 Route::middleware([CheckAdminMiddleware::class])->group(function () {
