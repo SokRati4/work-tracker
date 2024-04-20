@@ -16,6 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
+                <!-- Przycisk przekierowujący do /employees -->
+    <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
             </div>
         </div>
     </div>
