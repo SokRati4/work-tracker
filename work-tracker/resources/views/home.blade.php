@@ -18,7 +18,8 @@
                 </div>
 
                 <!-- Przycisk przekierowujący do /employees -->
-    <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
+                <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
+                <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
             </div>
         </div>
     </div>
