@@ -8,6 +8,7 @@ use App\Http\Controllers\WorkdayController;
 use App\Http\Middleware\CheckAcceptedMiddleware;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckAdministrationMiddleware;
+use App\Models\Workday;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -20,6 +21,8 @@ Auth::routes();
 
 Route::middleware([CheckAcceptedMiddleware::class])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/employees/my-months', [EmployeeController::class, 'myMonths'])->name('employees.my-months');
+    Route::get('/workdays/{month}/{year}/work-month-normal', [WorkdayController::class, 'workMonthNormal'])->name('workdays.work-month-normal');
 });
 
 Route::middleware([CheckAdministrationMiddleware::class])->group(function () {

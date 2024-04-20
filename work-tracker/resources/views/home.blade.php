@@ -20,6 +20,7 @@
                 <!-- Przycisk przekierowujący do /employees -->
                 <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
                 <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
+                <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
             </div>
         </div>
     </div>
