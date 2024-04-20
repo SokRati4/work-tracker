@@ -68,6 +68,10 @@ class EmploymentController extends Controller
     }
 
     public function details($id) {
-        
+        $employment = Employment::find($id);
+
+        if (!$employment) return redirect()->route('employments.index')->with('error', 'Nie znaleziono wybranego zatrudnienia.');
+    
+        return view('employments.details', ['employment' => $employment]);
     }
 }
