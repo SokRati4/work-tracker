@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Praca w miesiącu {{ $month }} {{ $year }}</h1>
+    <h1>Praca w miesiącu {{ $month }} {{ $year }} - {{ $user->first_name }} {{ $user->last_name }}</h1>
 
     @foreach(range(1, $daysInMonth) as $day)
         <div>
@@ -13,7 +13,7 @@
 
             <form method="POST" action="{{ route('workdays.update') }}">
                 @csrf
-                <input type="hidden" name="user_id" value="{{ $userId }}">
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
                 <input type="hidden" name="date" value="{{ "$year-$month-$day" }}">
                 <input type="hidden" name="month_number" value="{{ $month }}">
 

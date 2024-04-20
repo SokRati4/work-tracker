@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbsenceType;
+use App\Models\Employment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Workday;
 
@@ -10,10 +12,50 @@ class WorkdayController extends Controller
 {
     public function workMonth($id, $month, $year) {
 
+        $user = User::find($id);
+        if (!$user) return redirect()->route('employees.index')->with('error', 'Nie można znaleźć użytkownika.');
+
         // Sprawdzamy, czy podane wartości miesiąca i roku są poprawne
         if (!checkdate($month, 1, $year)) {
             // Niepoprawny miesiąc lub rok
             return redirect()->route('someErrorRoute')->with('error', 'Niepoprawny miesiąc lub rok.');
+        }
+
+        // Sprawdzamy, czy istnieje rekord zatrudnienia dla danego użytkownika na dany miesiąc i rok
+        // $employmentExists = Employment::where('id_user', $id)
+        // ->where(function ($query) use ($month, $year) {
+        //     $query->whereYear('start_date', '<=', $year)
+        //         ->where(function ($query) use ($month) {
+        //             $query->whereMonth('start_date', '<=', $month)
+        //                     ->orWhereNull('start_date');
+        //         })
+        //         ->where(function ($query) use ($year) {
+        //             $query->whereYear('end_date', '>=', $year)
+        //                     ->orWhereNull('end_date');
+        //         });
+        // })
+        // ->exists();
+        $employments = Employment::where('id_user', $id)->get();
+        $employmentDates = [];
+        foreach ($employments as $employment) {
+            $start = new \DateTime($employment->start_date);
+            $end = $employment->end_date ? new \DateTime($employment->end_date) : now();
+            $interval = $start->diff($end);
+
+            for ($i = 0; $i <= $interval->m; $i++) {
+                $currentMonth = $start->format('m');
+                $currentYear = $start->format('Y');
+                $employmentDates["$currentMonth-$currentYear"] = $start->format('F Y');
+                $start->modify('+1 month');
+            }
+        }
+        // var_dump($employmentDates);
+        // var_dump("$month-$year"); exit();
+        $employmentExists = array_key_exists("$month-$year", $employmentDates);
+
+        // Jeśli rekord zatrudnienia nie istnieje, przekieruj do odpowiedniego widoku z informacją
+        if (!$employmentExists) {
+            return redirect()->route('employees.index')->with('error', 'Nie znaleziono użytkownika pracującego w tym terminie.');
         }
 
         // Pobieramy ilość dni w danym miesiącu i roku
@@ -27,10 +69,13 @@ class WorkdayController extends Controller
 
         $absenceTypes = AbsenceType::all();
 
-        return view('workdays.work-month', ['workdays' => $workdays, 'daysInMonth' => $daysInMonth, 'userId' => $id, 'absenceTypes' => $absenceTypes, 'month' => $month, 'year' => $year]);
+        return view('workdays.work-month', ['workdays' => $workdays, 'daysInMonth' => $daysInMonth, 'user' => $user, 'absenceTypes' => $absenceTypes, 'month' => $month, 'year' => $year]);
     }
 
     public function update(Request $request) {
+        $user = User::find($request->input('user_id'));
+        if (!$user) return redirect()->route('employees.index')->with('error', 'Nie można znaleźć użytkownika.');
+
         // Pobierz dane z żądania
         $userId = $request->input('user_id');
         $date = $request->input('date');
