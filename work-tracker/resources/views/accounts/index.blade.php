@@ -7,7 +7,7 @@
     <ul>
         @foreach ($users as $user)
             <li>
-                {{ $user->first_name }} {{ $user->last_name }} - {{ $user->email }}
+                <a href="{{ route('accounts.details', $user->id) }}">{{ $user->first_name }} {{ $user->last_name }} - {{ $user->email }}</a>
                 @if ($user->accepted == 0)
                     <form action="{{ route('accounts.accept', $user->id) }}" method="POST" style="display: inline;">
                         @csrf

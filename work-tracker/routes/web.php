@@ -25,5 +25,9 @@ Route::middleware([CheckAdminMiddleware::class])->group(function () {
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/accounts', [AccountController::class, 'index'])->name('accounts.index');
     Route::put('/accounts/{id}/accept', [AccountController::class, 'accept'])->name('accounts.accept');
+    Route::get('/accounts/{id}/details', [AccountController::class, 'details'])->name('accounts.details');
+    Route::delete('/accounts/{id}', [AccountController::class, 'delete'])->name('accounts.delete');
+    Route::get('/accounts/{id}/edit', [AccountController::class, 'edit'])->name('accounts.edit');
+    Route::put('/accounts/{id}', [AccountController::class, 'update'])->name('accounts.update');
 });
 
