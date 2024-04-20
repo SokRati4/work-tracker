@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role');
     }
+
+    public function workday()
+    {
+        return $this->hasOne(Workday::class);
+    }
+
+    public function employment()
+    {
+        return $this->hasOne(Employment::class);
+    }
 }

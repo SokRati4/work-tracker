@@ -9,7 +9,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = User::all(); // Pobranie wszystkich użytkowników
+        $employees = User::where('accepted', 1)->get();
 
         return view('employees.index', ['employees' => $employees]);
     }
