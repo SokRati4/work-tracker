@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -24,8 +25,11 @@ class AccountController extends Controller
     }
 
     public function details($id) {
-        $user = User::find($id);
-        if ($user) return view('accounts.details', ['user' => $user]);
+        $roles = Role::all();
+        $user = User::leftJoin('roles', 'users.role', '=', 'roles.id')
+                    ->select('users.*', 'roles.id as role_id', 'roles.role')
+                    ->find($id);
+        if ($user) return view('accounts.details', ['user' => $user, 'roles' => $roles]);
         else return back()->with('error', 'Nie można znaleźć wybranego użytkownika');
     }
     
@@ -67,6 +71,19 @@ class AccountController extends Controller
 
             $user->update($validatedData);
             return redirect()->route('accounts.details', $user->id)->with('success', 'Dane użytkownika zostały zaktualizowane.');
+        } else {
+            return redirect()->route('accounts.index')->with('error', 'Nie można znaleźć użytkownika.');
+        }
+    }
+
+    public function changeRole(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $newRoleId = $request->input('new_role');
+            $user->role = $newRoleId;
+            $user->save();
+            return redirect()->route('accounts.details', $user->id)->with('success', 'Rola użytkownika została zmieniona.');
         } else {
             return redirect()->route('accounts.index')->with('error', 'Nie można znaleźć użytkownika.');
         }

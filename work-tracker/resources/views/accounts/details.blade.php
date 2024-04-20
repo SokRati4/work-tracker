@@ -12,5 +12,25 @@
         <button type="submit">Usuń Konto</button>
     </form>
     <a href="{{ route('accounts.edit', $user->id) }}">Edytuj dane</a>
+
+    <br>
+    <h2>Zmień Rolę:</h2>
+    <form action="{{ route('accounts.change-role', $user->id) }}" method="POST">
+        @csrf
+        <div>
+            <label>Aktualna Rola: {{ $user->role }}</label>
+            
+        </div>
+        <div>
+            <label for="new_role">Nowa Rola:</label>
+            <select name="new_role" id="new_role">
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->role }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit">Zmień Rolę</button>
+    </form>
+
 </div>
 @endsection

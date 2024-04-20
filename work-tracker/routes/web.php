@@ -29,5 +29,7 @@ Route::middleware([CheckAdminMiddleware::class])->group(function () {
     Route::delete('/accounts/{id}', [AccountController::class, 'delete'])->name('accounts.delete');
     Route::get('/accounts/{id}/edit', [AccountController::class, 'edit'])->name('accounts.edit');
     Route::put('/accounts/{id}', [AccountController::class, 'update'])->name('accounts.update');
+    Route::post('/accounts/{id}/change-role', [AccountController::class, 'changeRole'])->name('accounts.change-role');
+
 });
 
