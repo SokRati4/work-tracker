@@ -28,7 +28,7 @@ Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
     Route::get('/accounts/{id}/edit', [AccountController::class, 'edit'])->name('accounts.edit');
     Route::put('/accounts/{id}', [AccountController::class, 'update'])->name('accounts.update');
     Route::post('/accounts/{id}/change-role', [AccountController::class, 'changeRole'])->name('accounts.change-role');
-
+    Route::get('/employees/{id}/employee', [EmployeeController::class, 'employee'])->name('employees.employee');
 });
 
 Route::middleware([CheckAdminMiddleware::class])->group(function () {

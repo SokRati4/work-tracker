@@ -6,8 +6,10 @@
 
     <ul>
         @foreach ($employees as $employee)
-            <li>{{ $employee->login }} - {{ $employee->email }}</li>
+            <li>
+                <a href="{{ route('employees.employee', $employee->id) }}" >{{ $employee->login }} - {{ $employee->email }}</a>
+            </li>
         @endforeach
     </ul>
-    </div>
-    @endsection
+</div>
+@endsection
