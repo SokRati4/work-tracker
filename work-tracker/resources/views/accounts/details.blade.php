@@ -2,6 +2,16 @@
 
 @section('content')
 <div>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-error">
+            {{ session('error') }}
+        </div>
+    @endif
     <h1>{{ $user->first_name }} {{ $user->last_name }}</h1>
 
     Dane użytkownika

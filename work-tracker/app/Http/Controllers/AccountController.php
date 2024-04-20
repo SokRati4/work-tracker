@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Workday;
+use App\Models\Employment;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -36,11 +38,21 @@ class AccountController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-        if ($user) {
-            $user->delete();
-            return redirect()->route('accounts.index')->with('success', 'Konto użytkownika zostało usunięte.');
-        } else {
+        if (!$user) {
             return redirect()->route('accounts.index')->with('error', 'Nie można znaleźć użytkownika.');
+        }
+        try {
+            // Usuwanie rekordów z tabel workday i employment powiązanych z użytkownikiem
+            Workday::where('id_user', $id)->delete();
+            Employment::where('id_user', $id)->delete();
+    
+            // Usuwanie samego użytkownika
+            $user->delete();
+    
+            return redirect()->route('accounts.index')->with('success', 'Konto użytkownika zostało usunięte wraz z powiązanymi danymi.');
+        } catch (\Exception $e) {
+            // W przypadku błędu usuwania
+            return redirect()->route('accounts.index')->with('error', 'Wystąpił błąd podczas usuwania użytkownika: ' . $e->getMessage());
         }
     }
 

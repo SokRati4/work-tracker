@@ -18,7 +18,7 @@ class WorkdayController extends Controller
         // Sprawdzamy, czy podane wartości miesiąca i roku są poprawne
         if (!checkdate($month, 1, $year)) {
             // Niepoprawny miesiąc lub rok
-            return redirect()->route('someErrorRoute')->with('error', 'Niepoprawny miesiąc lub rok.');
+            return redirect()->route('employees.index')->with('error', 'Niepoprawny miesiąc lub rok.');
         }
 
         $employments = Employment::where('id_user', $id)->get();
@@ -121,7 +121,7 @@ class WorkdayController extends Controller
         // Sprawdzamy, czy podane wartości miesiąca i roku są poprawne
         if (!checkdate($month, 1, $year)) {
             // Niepoprawny miesiąc lub rok
-            return redirect()->route('someErrorRoute')->with('error', 'Niepoprawny miesiąc lub rok.');
+            return redirect()->route('employees.my-months')->with('error', 'Niepoprawny miesiąc lub rok.');
         }
 
         $employments = Employment::where('id_user', $id)->get();
