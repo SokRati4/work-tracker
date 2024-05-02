@@ -286,17 +286,12 @@ INSERT INTO `workday` (`id`, `id_user`, `date`, `attendance`, `hours`, `id_absen
 -- Struktura tabeli dla tabeli `urlop`
 --
 
-CREATE TABLE `urlop` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_użytkownik` int(10) UNSIGNED NOT NULL,
-  `id_typ_nieobecności` int(11) NOT NULL,
-  `data_rozpoczęcia` date NOT NULL,
-  `data_zakończenia` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_użytkownik` (`id_użytkownik`),
-  KEY `id_typ_nieobecności` (`id_typ_nieobecności`),
-  CONSTRAINT `fk_urlop_użytkownik` FOREIGN KEY (`id_użytkownik`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_urlop_typ_nieobecności` FOREIGN KEY (`id_typ_nieobecności`) REFERENCES `absence_type` (`id`)
+CREATE TABLE `vacation` (
+  `id` int(10) UNSIGNED NOT NULL ,
+  `id_user` bigint(20) UNSIGNED NOT NULL,
+  `id_absence_type` int(11) DEFAULT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -304,19 +299,13 @@ CREATE TABLE `urlop` (
 -- Struktura tabeli dla tabeli `prośby_urlopowe`
 --
 
-CREATE TABLE `prośby_urlopowe` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_użytkownik` int(10) UNSIGNED NOT NULL,
-  `id_typ_nieobecności` int(11) NOT NULL,
-  `data_rozpoczęcia` date NOT NULL,
-  `data_zakończenia` date NOT NULL,
-  `tekst` varchar(255) DEFAULT NULL,
-  `wniosek` blob,
-  PRIMARY KEY (`id`),
-  KEY `id_użytkownik` (`id_użytkownik`),
-  KEY `id_typ_nieobecności` (`id_typ_nieobecności`),
-  CONSTRAINT `fk_prośby_urlopowe_użytkownik` FOREIGN KEY (`id_użytkownik`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_prośby_urlopowe_typ_nieobecności` FOREIGN KEY (`id_typ_nieobecności`) REFERENCES `absence_type` (`id`)
+CREATE TABLE `vacation_request` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_user` bigint(20) UNSIGNED NOT NULL,
+  `id_absence_type` int(11) DEFAULT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  `text` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -411,6 +400,22 @@ ALTER TABLE `workday`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Indeksy dla tabeli `vacation`
+--
+ALTER TABLE `vacation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_absence_type` (`id_absence_type`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeksy dla tabeli `vacation_request`
+--
+ALTER TABLE `vacation_request`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_absence_type` (`id_absence_type`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- AUTO_INCREMENT dla zrzuconych tabel
 --
 
@@ -484,6 +489,19 @@ ALTER TABLE `users`
 ALTER TABLE `workday`
   ADD CONSTRAINT `workday_ibfk_1` FOREIGN KEY (`id_absence_type`) REFERENCES `absence_type` (`id`),
   ADD CONSTRAINT `workday_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+COMMIT;
+
+--
+-- Ograniczenia dla tabeli `vacation`
+--
+ALTER TABLE `vacation`
+  ADD CONSTRAINT `vacation_ibfk_1` FOREIGN KEY (`id_absence_type`) REFERENCES `absence_type` (`id`),
+  ADD CONSTRAINT `vacation_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+COMMIT;
+
+ALTER TABLE `vacation_request`
+  ADD CONSTRAINT `vacation_request_ibfk_1` FOREIGN KEY (`id_absence_type`) REFERENCES `absence_type` (`id`),
+  ADD CONSTRAINT `vacation_request_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
