@@ -283,6 +283,43 @@ INSERT INTO `workday` (`id`, `id_user`, `date`, `attendance`, `hours`, `id_absen
 (2, 8, '2024-01-01', 0, NULL, 3, NULL, 1);
 
 --
+-- Struktura tabeli dla tabeli `urlop`
+--
+
+CREATE TABLE `urlop` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_użytkownik` int(10) UNSIGNED NOT NULL,
+  `id_typ_nieobecności` int(11) NOT NULL,
+  `data_rozpoczęcia` date NOT NULL,
+  `data_zakończenia` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_użytkownik` (`id_użytkownik`),
+  KEY `id_typ_nieobecności` (`id_typ_nieobecności`),
+  CONSTRAINT `fk_urlop_użytkownik` FOREIGN KEY (`id_użytkownik`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_urlop_typ_nieobecności` FOREIGN KEY (`id_typ_nieobecności`) REFERENCES `absence_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+--
+-- Struktura tabeli dla tabeli `prośby_urlopowe`
+--
+
+CREATE TABLE `prośby_urlopowe` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_użytkownik` int(10) UNSIGNED NOT NULL,
+  `id_typ_nieobecności` int(11) NOT NULL,
+  `data_rozpoczęcia` date NOT NULL,
+  `data_zakończenia` date NOT NULL,
+  `tekst` varchar(255) DEFAULT NULL,
+  `wniosek` blob,
+  PRIMARY KEY (`id`),
+  KEY `id_użytkownik` (`id_użytkownik`),
+  KEY `id_typ_nieobecności` (`id_typ_nieobecności`),
+  CONSTRAINT `fk_prośby_urlopowe_użytkownik` FOREIGN KEY (`id_użytkownik`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_prośby_urlopowe_typ_nieobecności` FOREIGN KEY (`id_typ_nieobecności`) REFERENCES `absence_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
