@@ -17,6 +17,7 @@ class VacationRequest extends Model
         'date_from',
         'date_to',
         'text',
+        'status',
     ];
 
     public $timestamps = false;
