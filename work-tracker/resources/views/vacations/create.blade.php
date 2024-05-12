@@ -1,9 +1,15 @@
 @extends('layouts.app')
 @section('content')
+
     <h1>Nowa Prośba Urlopowana</h1>
 
     @if(session('success'))
         <p style="color: green;">{{ session('success') }}</p>
+    @endif
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
     @endif
 
     <form action="{{ route('vacations.store') }}" method="POST">

@@ -8,14 +8,25 @@ use App\Models\User;
 use App\Models\AbsenceType;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vacation;
+use App\Models\Employment;
 
 
 class VacationController extends Controller
 {
     public function create()
     {
+    $user = Auth::user();
+
+    // Sprawdź, czy istnieje rekord zatrudnienia dla użytkownika
+    $employment = Employment::where('id_user', $user->id)->first();
+
+    if ($employment) {
         $absenceTypes = AbsenceType::all();
         return view('vacations.create',['absenceTypes' => $absenceTypes]);
+    } else {
+        
+        return redirect()->back()->with('error', 'Nie jesteś nawet zatrudniony');
+    }
     }
 
     /**
