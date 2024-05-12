@@ -31,9 +31,12 @@
                     <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
                     <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
                     <a href="{{ route('employments.index') }}">Zatrudnienia</a>
+                    <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a>
                 @endif
 
                 <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
+                <a href="{{route('vacations.index') }}">Urlopy</a>
+                
             </div>
         </div>
     </div>
