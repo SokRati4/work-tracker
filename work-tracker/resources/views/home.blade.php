@@ -36,7 +36,7 @@
 
                 <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
                 <a href="{{route('vacations.index') }}">Urlopy</a>
-                
+                <a href="{{route('messages.index') }}">Wiadomości</a>
             </div>
         </div>
     </div>
