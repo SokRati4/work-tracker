@@ -3,13 +3,19 @@
 @section('styles')
 <style>
     .dashboard-container {
-        display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        border-radius: 10px;
     }
 
     .dashboard-links {
-        margin-right: 20px;
+        padding: 10px;
+    }
+    .bg-1{
+        background-color: #f1f3f5;
+    }
+    .container{
+        padding: 10px;
     }
 </style>
 @endsection
@@ -42,21 +48,25 @@
                 </div>
     
                 @if (Auth::user()->role == 2 || Auth::user()->role == 3)
-                    <div class="dashboard-container">
-                        <div class="dashboard-links">
-                            <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
-                        </div>
-                        <div class="dashboard-links">
-                            <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="dashboard-container bg-1">
+                            <div class="dashboard-links">
+                                <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
+                            </div>
+                            <div class="dashboard-links">
+                                <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="dashboard-container">
-                        <div class="dashboard-links">
-                                <a href="{{ route('employments.index') }}">Zatrudnienia</a>
+                    <div class="col-md-4">
+                        <div class="dashboard-container bg-1">
+                            <div class="dashboard-links">
+                                    <a href="{{ route('employments.index') }}">Zatrudnienia</a>
+                                </div>
+                            <div class="dashboard-links">
+                                <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a>
                             </div>
-                        <div class="dashboard-links">
-                            <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a>
                         </div>
                     </div>
 
@@ -65,15 +75,16 @@
                     <a href="{{ route('employments.index') }}">Zatrudnienia</a>
                     <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a> -->
                 @endif
-                <div class="dashboard-container">
-                    <div class="dashboard-links">
-                        <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
-                    </div>
-                    <div class="dashboard-links">
-                        <a href="{{ route('vacations.index') }}">Urlopy</a>
+                <div class="col-md-4">
+                    <div class="dashboard-container bg-1">
+                        <div class="dashboard-links">
+                            <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
+                        </div>
+                        <div class="dashboard-links">
+                            <a href="{{ route('vacations.index') }}">Urlopy</a>
+                        </div>
                     </div>
                 </div>
-
                 <!-- <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
                 <a href="{{route('vacations.index') }}">Urlopy</a>  -->
             </div>
