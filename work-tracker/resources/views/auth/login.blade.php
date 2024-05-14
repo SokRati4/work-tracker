@@ -19,7 +19,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div>
-                <img src="/Applications/XAMPP/xamppfiles/htdocs/projekt/work-tracker/work-tracker/resources/views/icon/icon.png" alt="Logo" class="img-fluid">
+                <img src="work-tracker/resources/views/icon/icon.png" alt="Logo" class="img-fluid">
             </div>
             <div class="card">
                 <div class="card-header login-box">{{ __('Login') }}</div>
