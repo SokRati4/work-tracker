@@ -1,9 +1,23 @@
 @extends('layouts.app')
 
+@section('styles')
+<style>
+    .dashboard-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-links {
+        margin-right: 20px;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -28,15 +42,40 @@
                 </div>
     
                 @if (Auth::user()->role == 2 || Auth::user()->role == 3)
-                    <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
+                    <div class="dashboard-container">
+                        <div class="dashboard-links">
+                            <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
+                        </div>
+                        <div class="dashboard-links">
+                            <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-container">
+                        <div class="dashboard-links">
+                                <a href="{{ route('employments.index') }}">Zatrudnienia</a>
+                            </div>
+                        <div class="dashboard-links">
+                            <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a>
+                        </div>
+                    </div>
+
+                    <!-- <a href="{{ route('employees.index') }}">Przejdź do Listy Pracowników</a>
                     <a href="{{ route('accounts.index') }}">Zarządzanie kontami</a>
                     <a href="{{ route('employments.index') }}">Zatrudnienia</a>
-                    <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a>
+                    <a href="{{ route('vacations.adminIndex') }}">Zarządzaj urlopami</a> -->
                 @endif
+                <div class="dashboard-container">
+                    <div class="dashboard-links">
+                        <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
+                    </div>
+                    <div class="dashboard-links">
+                        <a href="{{ route('vacations.index') }}">Urlopy</a>
+                    </div>
+                </div>
 
-                <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
-                <a href="{{route('vacations.index') }}">Urlopy</a>
-                
+                <!-- <a href="{{ route('employees.my-months') }}">Zobacz swoją pracę</a>
+                <a href="{{route('vacations.index') }}">Urlopy</a>  -->
             </div>
         </div>
     </div>
