@@ -1,11 +1,28 @@
 @extends('layouts.app')
 
+@section('styles')
+<style>
+    .btn-login {
+        background-color: #16C7AA;
+    }
+    .btn-link-color{
+        color: #16C7AA;
+    }
+    .login-box{
+        background-color: #16C7AA;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div>
+                <img src="/Applications/XAMPP/xamppfiles/htdocs/projekt/work-tracker/work-tracker/resources/views/icon/icon.png" alt="Logo" class="img-fluid">
+            </div>
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header login-box">{{ __('Login') }}</div>
 
                 <div class="card-body">
                 @if (session('error'))
@@ -59,7 +76,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-login">
                                     {{ __('Login') }}
                                 </button>
 
