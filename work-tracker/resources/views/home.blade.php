@@ -8,7 +8,8 @@
     }
 
     .bg-1{
-        background-color: #f1f3f5;
+        /* background-color: #f1f3f5; */
+        background-color: red;
     }
 </style>
 @endsection
