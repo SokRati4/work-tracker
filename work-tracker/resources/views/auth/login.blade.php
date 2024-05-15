@@ -11,6 +11,13 @@
     .login-box{
         background-color: #16C7AA;
     }
+    .img-size{
+        width: 80px;
+        height: auto
+    }
+    .img-pos{
+        text-align: center;
+    }
 </style>
 @endsection
 
@@ -18,8 +25,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div>
-                <img src="work-tracker/resources/views/icon/icon.png" alt="Logo" class="img-fluid">
+            <div class="img-pos">
+                <img src="{{ asset('icon/icon.png') }}" alt="Logo" class="img-fluid img-size">
             </div>
             <div class="card">
                 <div class="card-header login-box">{{ __('Login') }}</div>
