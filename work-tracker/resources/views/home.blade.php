@@ -9,7 +9,7 @@
         margin-bottom: 20px;
     }
     .bg-1{
-        background-color: #f1f3f5;
+        background-color: #ebedeb;
     }
     .welcome-box{
         height: 30px;
