@@ -277,9 +277,6 @@
                                                 </div>
                                             </div>
                             </div>
-                            <div class="col-md-12 p-3">
-                                                <div class="akcept-box vertical-center wnioski-box">Wnioski urlopowe</div>
-                            </div>
                     </div>
                     @endif 
         </div>
