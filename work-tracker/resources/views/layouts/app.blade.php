@@ -39,6 +39,7 @@
                 </div>
                 <ul class="navbar-nav ms-auto">
                             <li class="nav-item dropdown">
+                            @if(Auth::check())
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Menu
                                 </a>
@@ -50,6 +51,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}">Wnioski urlopowe</a>
                                 </div>
                                 @endif
+
                                 @if (Auth::user()->role == 2 || Auth::user()->role == 3)
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}">Lista pracowników</a>
@@ -62,6 +64,7 @@
                                 </div>
                                 @endif
                             </li>
+                            @endif 
                     </ul>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
