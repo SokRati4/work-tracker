@@ -45,6 +45,7 @@
                                 </a>
                                 @if (Auth::user()->role == 1)
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Moja praca</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Wiadomości</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Moje urlopy</a>
@@ -54,6 +55,7 @@
 
                                 @if (Auth::user()->role == 2 || Auth::user()->role == 3)
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Lista pracowników</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Zarządzanie kontami</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Zatrudnienia</a>
