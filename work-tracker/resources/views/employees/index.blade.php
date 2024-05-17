@@ -109,7 +109,7 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    <h1>Lista Pracowników</h1>
+                                    
                                     <ul>
                                         @foreach ($employees as $employee)
                                             <li>
