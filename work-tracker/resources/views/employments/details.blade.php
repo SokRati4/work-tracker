@@ -112,6 +112,12 @@
         justify-content: center;
         font-size: 10px;
     }
+    .table td{
+        text-align: center;
+    }
+    .table thead th{
+        text-align: center;
+    }
 
 </style>
 @endsection
@@ -143,7 +149,30 @@
 
                             <div class="p-3">
                                 <div>
-                                    tabela employment
+                                    <table class="table">
+                                        <thead class="table-header">
+                                            <tr>
+                                                <th>Imię i nazwisko</th>
+                                                <th>Rodzaj umowy</th>
+                                                <th>Stanowisko</th>
+                                                <th>Stawka</th>
+                                                <th>Okres miesięcy</th>
+                                                <th>Data rozpoczęcia umowy</th>
+                                                <th>Data zakończenia umowy</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                    <td>{{ $employment->user->first_name }} {{ $employment->user->last_name }}</td>
+                                                    <td>{{ $employment->contract_type }}</td>
+                                                    <td>{{ $employment->position }}</td>
+                                                    <td>{{ $employment->rate }}</td>
+                                                    <td>{{ $employment->period_month }}</td>
+                                                    <td>{{ $employment->start_date }}</td>
+                                                    <td>{{ $employment->end_date }}</td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div> 
