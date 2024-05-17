@@ -114,7 +114,7 @@
                                             <a class="link-color" href="{{ route('employments.details', $employment->id) }}">
                                                     <span class="employee-name">{{ $employment->user->first_name }} {{ $employment->user->last_name }}:</span> 
                                                     {{ $employment->start_date }} 
-                                                </a>
+                                            </a>
                                         </li>
                                     @endforeach
                                     </ul>
