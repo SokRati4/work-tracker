@@ -46,23 +46,22 @@
                                 @if (Auth::user()->role == 1)
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Moja praca</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Wiadomości</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Moje urlopy</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Wnioski urlopowe</a>
+                                    <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
                                 </div>
                                 @endif
 
                                 @if (Auth::user()->role == 2 || Auth::user()->role == 3)
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Lista pracowników</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Zarządzanie kontami</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Zatrudnienia</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Wiadomości</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Urlopy</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Moja praca</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}">Moje urlopy</a>
+                                    <a class="dropdown-item" href="{{ url('/employees') }}">Lista pracowników</a>
+                                    <a class="dropdown-item" href="{{ url('/accounts') }}">Zarządzanie kontami</a>
+                                    <a class="dropdown-item" href="{{ url('/employments') }}">Zatrudnienia</a>
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/admin/vacation-requests') }}">Urlopy</a>
+                                    <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
+                                    <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
                                 </div>
                                 @endif
                             </li>

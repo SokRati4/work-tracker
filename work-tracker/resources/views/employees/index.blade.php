@@ -67,10 +67,16 @@
         font-size: small;
         flex-grow: 1;
     }
-    .img-size{
-        width: 100px;
+    .img-size {
+        width: 100px; 
+        height: auto; 
+        max-width: 100%; 
     }
-    
+    .employee-name {
+    color: black;
+    font-weight: bold;
+    }
+
 
 
 </style>
@@ -107,7 +113,10 @@
                                     <ul>
                                         @foreach ($employees as $employee)
                                             <li>
-                                                <a class="link-color" href="{{ route('employees.employee', $employee->id) }}" >{{ $employee->login }} - {{ $employee->email }}</a>
+                                                <a class="link-color" href="{{ route('employees.employee', $employee->id) }}">
+                                                    <span class="employee-name">{{ $employee->first_name }} {{ $employee->last_name }}:</span> 
+                                                    {{ $employee->login }} | {{ $employee->email }}
+                                                </a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -141,16 +150,17 @@
                                 <div class="p-3">
                                     <div class="row mt-1">
                                             <div class="col-md-3">
+                                                <div class="ms-3">
+                                                    <img src="{{asset('icon/new_user_icon.png') }}" alt="Logo" class="img-fluid" style="width: 50px; height: auto;">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-9 ">
                                                 <a class="link-color-2" href="{{ url('/home') }}">
-                                                    <div class="func-box vertical-center" style="font-size: 35px;">
-                                                        +
+                                                    <div class="func-box vertical-center" style="font-size: 12px;">
+                                                        Nowy pracownik
                                                     </div>
                                                 </a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div>
-                                                    <img src="{{asset('work-tracker/public/new_user_icon.png') }}" alt="Logo" class="img-fluid img-size">
-                                                </div>
                                             </div>
                                     </div>
                                 </div>
