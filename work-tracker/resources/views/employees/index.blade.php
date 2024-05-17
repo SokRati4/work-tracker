@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div>
-                                                    <img src="{{ asset('work-tracker/public/icon/new-user-icon.png') }}" alt="Logo" class="img-fluid img-size">
+                                                    <img src="{{asset('work-tracker/public/new_user_icon.png') }}" alt="Logo" class="img-fluid img-size">
                                                 </div>
                                             </div>
                                     </div>
