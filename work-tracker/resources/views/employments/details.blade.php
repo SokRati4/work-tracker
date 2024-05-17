@@ -12,9 +12,9 @@
         background-color: #ebedeb;
     }
     .vertical-center {
-            min-height: 15px;
-            display: flex;
-            align-items: center;
+        min-height: 15px;
+        display: flex;
+        align-items: center;
     }
     .header-box{
         background-color: #16C7AA;
@@ -73,11 +73,45 @@
         max-width: 100%; 
     }
     .employee-name {
-    color: black;
-    font-weight: bold;
+        color: black;
+        font-weight: bold;
     }
-
-
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+    .table th, .table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+    .table th {
+        background-color: #f4f4f4;
+    }
+    .table tbody tr:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .table-header th {
+        background-color: #16C7AA;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .button{
+        background-color: #16C7AA;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        width: 100px;
+        height: 30px;
+        justify-content: center;
+        font-size: 10px;
+    }
 
 </style>
 @endsection
@@ -89,6 +123,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Dane zatrudnienia') }}</div>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-error">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 
                 <div class="row p-3">
                     <div class="col-md-12">
@@ -99,14 +143,7 @@
 
                             <div class="p-3">
                                 <div>
-
-
-
-                                    Dane zatrudnienia (tabela employment)
-
-
-
-                                
+                                    tabela employment
                                 </div>
                             </div>
                         </div> 
