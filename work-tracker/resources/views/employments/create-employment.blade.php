@@ -83,9 +83,6 @@
         font-weight: bold;
         width: 200px;
     }
-    form{
-        
-    }
 </style>
 @endsection
 
