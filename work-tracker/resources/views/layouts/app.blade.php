@@ -15,14 +15,59 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @yield('styles')
+
+    <style>
+    .img-size{
+        width: 30px;
+        height: auto
+    }
+    </style>
+
+    
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
+            <div class="container p-1">
+                <a class="navbar-brand" href="{{ url('/home') }}" style="color: #16C7AA;">
+                    <!-- {{ config('app.name', 'Laravel') }} -->
+                    Work tracker
                 </a>
+                <div>
+                    <img src="{{ asset('icon/icon.png') }}" alt="Logo" class="img-fluid img-size">
+                </div>
+                <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                            @if(Auth::check())
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Menu
+                                </a>
+                                @if (Auth::user()->role == 1)
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
+                                    <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
+                                </div>
+                                @endif
+
+                                @if (Auth::user()->role == 2 || Auth::user()->role == 3)
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
+                                    <a class="dropdown-item" href="{{ url('/employees') }}">Lista pracowników</a>
+                                    <a class="dropdown-item" href="{{ url('/accounts') }}">Zarządzanie kontami</a>
+                                    <a class="dropdown-item" href="{{ url('/employments') }}">Zatrudnienia</a>
+                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/admin/vacation-requests') }}">Urlopy</a>
+                                    <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
+                                    <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
+                                </div>
+                                @endif
+                            </li>
+                            @endif 
+                    </ul>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -30,7 +75,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->

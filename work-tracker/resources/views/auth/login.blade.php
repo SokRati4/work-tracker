@@ -1,11 +1,35 @@
 @extends('layouts.app')
 
+@section('styles')
+<style>
+    .btn-login {
+        background-color: #16C7AA;
+    }
+    .btn-link-color{
+        color: #16C7AA;
+    }
+    .login-box{
+        background-color: #16C7AA;
+    }
+    .img-size{
+        width: 80px;
+        height: auto
+    }
+    .img-pos{
+        text-align: center;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <div class="img-pos">
+                <img src="{{ asset('icon/icon.png') }}" alt="Logo" class="img-fluid img-size">
+            </div>
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header login-box">{{ __('Login') }}</div>
 
                 <div class="card-body">
                 @if (session('error'))
@@ -59,12 +83,12 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-login">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link btn-link-color" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
