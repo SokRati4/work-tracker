@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\WorkDay;
+use App\Models\User;
 
 
 class HomeController extends Controller
@@ -43,8 +44,12 @@ class HomeController extends Controller
         $totalHours = $workdays->sum('hours');
 
 
+        // Liczba pracowników do zaakceptowania
+        $toAccept = User::where('accepted', 0)->count();
+
         return view('home', [
             'totalHours' => $totalHours,
+            'toAccept' => $toAccept,
         ]);
     }
 }
