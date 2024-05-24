@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="praca-box vertical-center" style="justify-content: center;">
                                             <div>
-                                                X
+                                                {{ $totalHours }}
                                             </div>
                                         </div> 
                                 </div>
