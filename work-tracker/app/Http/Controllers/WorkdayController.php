@@ -7,6 +7,7 @@ use App\Models\Employment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Workday;
+use App\Models\Vacation;
 
 class WorkdayController extends Controller
 {
@@ -35,6 +36,18 @@ class WorkdayController extends Controller
                 $start->modify('+1 month');
             }
         }
+
+        $vacationData = Vacation::where('id_user', $id)
+            ->where(function($query) use ($year, $month) {
+                $query->whereYear('date_from', $year)
+                    ->whereMonth('date_from', $month)
+                    ->orWhere(function($query) use ($year, $month) {
+                        $query->whereYear('date_to', $year)
+                                ->whereMonth('date_to', $month);
+                    });
+            })
+            ->get();
+
         // var_dump($employmentDates);
         // var_dump("$month-$year"); exit();
         $employmentExists = array_key_exists("$month-$year", $employmentDates);
@@ -54,8 +67,16 @@ class WorkdayController extends Controller
                         ->get();
 
         $absenceTypes = AbsenceType::all();
-
-        return view('workdays.work-month', ['workdays' => $workdays, 'daysInMonth' => $daysInMonth, 'user' => $user, 'absenceTypes' => $absenceTypes, 'month' => $month, 'year' => $year]);
+        
+        return view('workdays.work-month', [
+            'workdays' => $workdays, 
+            'daysInMonth' => $daysInMonth, 
+            'user' => $user, 
+            'absenceTypes' => $absenceTypes, 
+            'month' => $month, 
+            'year' => $year,
+            'vacationData' => $vacationData,
+        ]);
     }
 
     public function update(Request $request) {

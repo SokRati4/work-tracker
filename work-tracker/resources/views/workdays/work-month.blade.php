@@ -143,7 +143,7 @@
                                             <form method="POST" action="{{ route('workdays.update') }}">
                                                 @csrf
                                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                <input type="hidden" name="date" value="{{ "$year-$month-$day" }}">
+                                                <input type="hidden" name="date" value="{{ $year-$month-$day }}">
                                                 <input type="hidden" name="month_number" value="{{ $month }}">
                                                 
                                                 <div class="py-1">
