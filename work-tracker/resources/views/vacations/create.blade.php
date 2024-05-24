@@ -87,70 +87,52 @@
 @endsection
 
 @section('content')
-<div class="container">
+    <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dodaj nowe zatrudnienie') }}</div>
+                <div class="card-header">{{ __('Wniosek urlopowy')}}</div>
+                @if(session('success'))
+                    <p style="color: green;">{{ session('success') }}</p>
+                @endif
+                @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
                 
                 <div class="row p-3">
-                    <form class="form-inline" action="{{ route('employments.store-employment') }}" method="POST">
+                    
+                    
                     <div class="input-group d-flex" style="justify-content:center;">
-                    @csrf
                         <div class="col-md-12 mx-1">
                             <div class="dashboard-container box-1 bg-1">
                                 <div class="header-box">
-                                    Imię i nazwisko
+                                    Nowy wniosek urlopowy
                                 </div>
 
                                 <div class="p-3" style="text-align:center;">
                                     <div>
-                                    {{ $employee->first_name }} {{ $employee->last_name }}
                                     </div>
                                 </div>
                             </div> 
                         </div>
                         <div class="col-md-3 mx-1">
-                                <div class="dashboard-container box-1 bg-1">
-                                    <div class="header-box">
-                                        Typ umowy
-                                    </div>
+                        <form action="{{ route('vacations.store') }}" method="POST">
+                            @csrf
 
-                                    <div class="p-3" style="text-align:center;">
-                                        <input type="text" name="contract_type" id="contract_type" required>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-md-3 mx-1">
-                                <div class="dashboard-container box-1 bg-1">
-                                    <div class="header-box">
-                                        Stanowisko
-                                    </div>
+                            <!-- Ukryte pole user_id z wartością ID zalogowanego użytkownika -->
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                            <!-- Status domyślnie ustawiony na "waiting" -->
+                            <input type="hidden" name="status" value="waiting">
 
-                                    <div class="p-3" style="text-align:center;">
-                                        <input type="text" name="position" id="position" required>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-md-3 mx-1">
-                                <div class="dashboard-container box-1 bg-1">
-                                    <div class="header-box">
-                                        Okres miesięcy
-                                    </div>
-
-                                    <div class="p-3" style="text-align:center;">
-                                        <input type="number" name="period_month" id="period_month" required>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-md-3 mx-1">
                                 <div class="dashboard-container box-1 bg-1">
                                     <div class="header-box">
                                         Data rozpoczęcia
                                     </div>
 
                                     <div class="p-3" style="text-align:center;">
-                                        <input type="date" name="start_date" id="start_date" required>
+                                        <input type="date" id="start_date" name="start_date"><br><br>
                                     </div>
                                 </div>
                         </div>
@@ -161,36 +143,41 @@
                                     </div>
 
                                     <div class="p-3" style="text-align:center;">
-                                        <input type="date" name="end_date" id="end_date">
+                                        <input type="date" id="end_date" name="end_date"><br><br>
                                     </div>
                                 </div>
                         </div>
                         <div class="col-md-3 mx-1">
                                 <div class="dashboard-container box-1 bg-1">
                                     <div class="header-box">
-                                        Stawka
+                                        Typ nieobecności
                                     </div>
 
                                     <div class="p-3" style="text-align:center;">
-                                        <input type="number" name="rate" id="rate" required>
+                                        <select id="absence_type" name="absence_type">
+                                            @foreach($absenceTypes as $absenceType)
+                                                <option value="{{ $absenceType->id }}">{{ $absenceType->name }}</option>
+                                            @endforeach
+                                        </select><br><br>
                                     </div>
                                 </div>
                         </div>
-                        <div class="col-md-6 mx-1">
+                        <div class="col-md-8 mx-1">
                                 <div class="dashboard-container box-1 bg-1">
                                     <div class="header-box">
-                                        Opis stanowiska
+                                        Notatka
                                     </div>
 
                                     <div class="p-3" style="text-align:center;">
-                                        <textarea name="job_description" id="job_description" required></textarea>
+                                        <input type="text" name="text" id="text">
                                     </div>
                                 </div>
                         </div>
+                        
 
                         <div class="col-md-12 mx-1">
                             <div class="dashboard-container box-1 d-flex" style="justify-content:center;">
-                                <button class="button" type="submit">Dodaj Zatrudnienie</button>
+                                <button class="button" type="submit">Wyślij Prośbę</button>
                             </div>
                         </div>
                         </div>

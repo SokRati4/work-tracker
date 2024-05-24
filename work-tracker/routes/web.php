@@ -9,6 +9,8 @@ use App\Http\Middleware\CheckAcceptedMiddleware;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckAdministrationMiddleware;
 use App\Models\Workday;
+use App\Http\Controllers\VacationController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -23,6 +25,15 @@ Route::middleware([CheckAcceptedMiddleware::class])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/employees/my-months', [EmployeeController::class, 'myMonths'])->name('employees.my-months');
     Route::get('/workdays/{month}/{year}/work-month-normal', [WorkdayController::class, 'workMonthNormal'])->name('workdays.work-month-normal');
+    Route::post('/vacation-request', [VacationController::class, 'store'])->name('vacations.store');
+    Route::get('/vacation-requests', [VacationController::class, 'index'])->name('vacations.index');
+    Route::get('/vacation-request/{id}', [VacationController::class, 'show'])->name('vacations.show');
+    Route::get('/create', [VacationController::class, 'create'])->name('vacations.create');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages/store',[MessageController::class,'store'])->name('messages.store');
+    Route::get('/messages/sent', [MessageController::class, 'sentMessages'])->name('messages.sentMessages');
+    Route::get('/messages/received', [MessageController::class, 'receivedMessages'])->name('messages.recievedMessages');
 });
 
 Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
@@ -40,6 +51,13 @@ Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
     Route::get('/employments/{id}/details', [EmploymentController::class, 'details'])->name('employments.details');
     Route::get('/workdays/{id}/{month}/{year}/work-month', [WorkdayController::class, 'workMonth'])->name('workdays.work-month');
     Route::post('/workdays/update', [WorkdayController::class, 'update'])->name('workdays.update');
+    Route::get('/admin/vacation-requests', [VacationController::class, 'adminIndex'])->name('vacations.adminIndex');
+    Route::post('/admin/vacation-request/{id}/change-status', [VacationController::class, 'changeStatus'])->name('vacations.changeStatus');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages/store',[MessageController::class,'store'])->name('messages.store');
+    Route::get('/messages/sent', [MessageController::class, 'sentMessages'])->name('messages.sentMessages');
+    Route::get('/messages/received', [MessageController::class, 'receivedMessages'])->name('messages.recievedMessages');
 });
 
 Route::middleware([CheckAdminMiddleware::class])->group(function () {
