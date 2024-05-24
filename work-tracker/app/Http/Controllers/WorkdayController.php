@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Workday;
 use App\Models\Vacation;
+use Carbon\Carbon;
 
 class WorkdayController extends Controller
 {
@@ -22,18 +23,34 @@ class WorkdayController extends Controller
             return redirect()->route('employees.index')->with('error', 'Niepoprawny miesiąc lub rok.');
         }
 
+        // $employments = Employment::where('id_user', $id)->get();
+        // $employmentDates = [];
+        // foreach ($employments as $employment) {
+        //     $start = new \DateTime($employment->start_date);
+        //     $end = $employment->end_date ? new \DateTime($employment->end_date) : now();
+        //     $interval = $start->diff($end);
+
+        //     for ($i = 0; $i <= $interval->m; $i++) {
+        //         $currentMonth = $start->format('m');
+        //         $currentYear = $start->format('Y');
+        //         $employmentDates["$currentMonth-$currentYear"] = $start->format('F Y');
+        //         $start->modify('+1 month');
+        //     }
+        // }
+        // Pobierz zatrudnienia użytkownika
         $employments = Employment::where('id_user', $id)->get();
         $employmentDates = [];
-        foreach ($employments as $employment) {
-            $start = new \DateTime($employment->start_date);
-            $end = $employment->end_date ? new \DateTime($employment->end_date) : now();
-            $interval = $start->diff($end);
 
-            for ($i = 0; $i <= $interval->m; $i++) {
+        foreach ($employments as $employment) {
+            $start = Carbon::parse($employment->start_date);
+            $end = $employment->end_date ? Carbon::parse($employment->end_date) : Carbon::now();
+            $interval = $start->diffInMonths($end);
+
+            for ($i = 0; $i <= $interval; $i++) {
                 $currentMonth = $start->format('m');
                 $currentYear = $start->format('Y');
                 $employmentDates["$currentMonth-$currentYear"] = $start->format('F Y');
-                $start->modify('+1 month');
+                $start->addMonth(); // Możemy użyć metody addMonth() zamiast modify('+1 month')
             }
         }
 
@@ -67,7 +84,7 @@ class WorkdayController extends Controller
                         ->get();
 
         $absenceTypes = AbsenceType::all();
-        
+
         return view('workdays.work-month', [
             'workdays' => $workdays, 
             'daysInMonth' => $daysInMonth, 
@@ -145,18 +162,20 @@ class WorkdayController extends Controller
             return redirect()->route('employees.my-months')->with('error', 'Niepoprawny miesiąc lub rok.');
         }
 
+        // Pobierz zatrudnienia użytkownika
         $employments = Employment::where('id_user', $id)->get();
         $employmentDates = [];
-        foreach ($employments as $employment) {
-            $start = new \DateTime($employment->start_date);
-            $end = $employment->end_date ? new \DateTime($employment->end_date) : now();
-            $interval = $start->diff($end);
 
-            for ($i = 0; $i <= $interval->m; $i++) {
+        foreach ($employments as $employment) {
+            $start = Carbon::parse($employment->start_date);
+            $end = $employment->end_date ? Carbon::parse($employment->end_date) : Carbon::now();
+            $interval = $start->diffInMonths($end);
+
+            for ($i = 0; $i <= $interval; $i++) {
                 $currentMonth = $start->format('m');
                 $currentYear = $start->format('Y');
                 $employmentDates["$currentMonth-$currentYear"] = $start->format('F Y');
-                $start->modify('+1 month');
+                $start->addMonth(); // Możemy użyć metody addMonth() zamiast modify('+1 month')
             }
         }
         // var_dump($employmentDates);
@@ -165,7 +184,7 @@ class WorkdayController extends Controller
 
         // Jeśli rekord zatrudnienia nie istnieje, przekieruj do odpowiedniego widoku z informacją
         if (!$employmentExists) {
-            return redirect()->route('home')->with('error', 'Coś poszło nie tak');
+             return redirect('/home')->with('error', 'Coś poszło nie tak');
         }
 
         // Pobieramy ilość dni w danym miesiącu i roku

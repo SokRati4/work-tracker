@@ -83,32 +83,20 @@ class EmployeeController extends Controller
 
         foreach ($employments as $employment) {
               // Pobieramy daty z umowy
-            $startDate = $employment->start_date;
-            $endDate = $employment->end_date ? $employment->end_date : now()->format('Y-m-d');
+            $startDate = Carbon::parse($employment->start_date);
+            $endDate = $employment->end_date ? Carbon::parse($employment->end_date) : now();
+    
+            // Iterujemy przez każdy miesiąc między startDate i endDate
+            while ($startDate->lessThanOrEqualTo($endDate)) {
+                $currentMonth = $startDate->format('m');
+                $currentYear = $startDate->format('Y');
+                $currentMonthName = $startDate->format('F');
 
-            // Tworzymy obiekt daty dla start_date
-            $startDateTime = new \DateTime($startDate);
-
-            // Sprawdzamy, czy end_date jest ustawione, jeśli nie to bierzemy dzisiaj
-            $endDateTime = new \DateTime($endDate);
-
-            // Pobieramy różnicę w miesiącach między datami
-            $interval = $startDateTime->diff($endDateTime);
-            $numMonths = $interval->format('%m');
-
-            // Dodajemy miesiące do tablicy
-            for ($i = 0; $i <= $numMonths; $i++) {
-                $currentMonth = $startDateTime->format('m');
-                $currentYear = $startDateTime->format('Y');
-                $currentMonthName = $startDateTime->format('F');
-
-                if ($startDateTime->format('Y-m') <= now()->format('Y-m')) {
-                    // Klucz w postaci "miesiąc-rok", wartość to nazwa miesiąca
-                    $months["$currentMonth-$currentYear"] = $currentMonthName;
-                }
+                // Klucz w postaci "miesiąc-rok", wartość to nazwa miesiąca
+                $months["$currentMonth-$currentYear"] = $currentMonthName;
 
                 // Przechodzimy do następnego miesiąca
-                $startDateTime->modify('+1 month');
+                $startDate->addMonth();
             }
         }
 
