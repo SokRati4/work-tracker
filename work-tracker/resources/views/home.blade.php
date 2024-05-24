@@ -114,7 +114,7 @@
                                         <div class="col-md-7">
                                             <div style="text-align: center;">Pracownicy do zaakceptowania</div>
                                             <div class="akcept-box vertical-center">
-                                                X
+                                                {{ $toAccept }}
                                             </div>
                                             
 
@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="praca-box vertical-center" style="justify-content: center;">
                                             <div>
-                                                X
+                                                {{ $totalHours }}
                                             </div>
                                         </div> 
                                 </div>

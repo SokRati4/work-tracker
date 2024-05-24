@@ -110,11 +110,21 @@
                                 @endif
                                     <ul>
                                     @foreach ($employments as $employment)
-                                        <li>
+                                        <!-- <li>
                                             <a class="link-color" href="{{ route('employments.details', $employment->id) }}">
                                                     <span class="employee-name">{{ $employment->user->first_name }} {{ $employment->user->last_name }}:</span> 
-                                                    {{ $employment->start_date }} 
+                                                    {{ $employment->start_date }}  - {{ $employment->end_date }}
                                             </a>
+                                        </li> -->
+
+                                        <li>
+                                            <a class="link-color" href="{{ route('employments.details', $employment->id) }}">
+                                                <span class="employee-name">{{ $employment->user->first_name }} {{ $employment->user->last_name }}:</span>
+                                                {{ $employment->start_date }} - {{ $employment->end_date }}
+                                            </a>
+                                            @if ($employment->end_date !== null && $employment->end_date < now())
+                                            <a class="btn btn-secondary" href="{{ route('employments.create-employment', $employment->user->id) }}">Dodaj nowe zatrudnienie</a>
+                                            @endif
                                         </li>
                                     @endforeach
                                     </ul>

@@ -134,16 +134,17 @@
                             @foreach(range(1, $daysInMonth) as $day)
                                 <div class="col-md-4 p-3">
                                     <div class="bg-1 box-1">
-                                        <div class="func-box">{{ $day }}.{{ $month }}.{{ $year }}</div>
+                                        @php
+                                            $workday = $workdays->firstWhere('date', Carbon\Carbon::createFromDate($year, $month, $day)->format('Y-m-d'));
+                                        @endphp
+                                        <div class="func-box">{{ $day }}.{{ $month }}.{{ $year }} {{ $workday ? "✔️" : "❌" }}</div>
                                         <div class="p-3">
-                                            @php
-                                                $workday = $workdays->firstWhere('date', Carbon\Carbon::createFromDate($year, $month, $day)->format('Y-m-d'));
-                                            @endphp
+                                            
 
                                             <form method="POST" action="{{ route('workdays.update') }}">
                                                 @csrf
                                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                <input type="hidden" name="date" value="{{ "$year-$month-$day" }}">
+                                                <input type="hidden" name="date" value="{{ $year-$month-$day }}">
                                                 <input type="hidden" name="month_number" value="{{ $month }}">
                                                 
                                                 <div class="py-1">
