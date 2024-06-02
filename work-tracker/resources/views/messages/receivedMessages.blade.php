@@ -2,23 +2,23 @@
 
 @section('content')
     <div class="container">
-        <h2>Wszystkie wysłane wiadomości</h2>
+        <h2>Wszystkie odebrane wiadomości</h2>
         <div class="row">
             <div class="col-md-12">
-                @if ($sent_messages->count() > 0) 
+                @if ($received_messages->count() > 0) 
                     <ul>
-                @foreach ($sent_messages as $message)
+                @foreach ($received_messages as $message)
                     <li>
                         <strong>Temat:</strong> {{ $message->subject }}<br>
                         <strong>Treść:</strong> {{$message->text  }}<br>
                         <strong>Data wysłania:</strong> {{ $message->date_send }}<br>
-                        <strong>Odbiorca:</strong>
-                        @if ($message->id_user_receiver)
+                        <strong>Nadawca:</strong>
+                        @if ($message->id_user_sender)
                             @php
-                                $receiver = \App\Models\User::find($message->id_user_receiver);
+                                $sender = \App\Models\User::find($message->id_user_sender);
                             @endphp
-                        @if ($receiver)
-                            {{ $receiver->first_name }} {{ $receiver->last_name }}<br>
+                        @if ($sender)
+                            {{ $sender->first_name }} {{ $sender->last_name }}<br>
                         @endif
                         @endif
                         <strong>Status:</strong> {{ $message->status }}<br>
@@ -42,12 +42,16 @@
                             </li>
                             @endforeach
                             </ul>
+                        </div>
+        
+                        
+                        <a href="{{ route('messages.create', ['receiver_id' => $message->id_user_sender, 'subject' => $message->subject, 'id_thread' => $message->id_thread]) }}" class="btn btn-primary">Odpowiedz</a>                 
                     </li>
                 @endforeach
 
                     </ul>
                 @else
-                    <p>Brak wysłanych wiadomości.</p>
+                    <p>Brak odebranych wiadomości.</p>
                 @endif
             </div>
         </div>

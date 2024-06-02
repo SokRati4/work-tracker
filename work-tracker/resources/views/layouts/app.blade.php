@@ -47,7 +47,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('/home') }}">Strona główna</a>
                                     <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
-                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/messages') }}">Wiadomości</a>
                                     <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
                                 </div>
                                 @endif
@@ -58,7 +58,7 @@
                                     <a class="dropdown-item" href="{{ url('/employees') }}">Lista pracowników</a>
                                     <a class="dropdown-item" href="{{ url('/accounts') }}">Zarządzanie kontami</a>
                                     <a class="dropdown-item" href="{{ url('/employments') }}">Zatrudnienia</a>
-                                    <a class="dropdown-item" href="{{ url('/home') }}">Wiadomości</a>
+                                    <a class="dropdown-item" href="{{ url('/messages') }}">Wiadomości</a>
                                     <a class="dropdown-item" href="{{ url('/admin/vacation-requests') }}">Urlopy</a>
                                     <a class="dropdown-item" href="{{ url('/employees/my-months') }}">Moja praca</a>
                                     <a class="dropdown-item" href="{{ url('/vacation-requests') }}">Moje urlopy</a>
