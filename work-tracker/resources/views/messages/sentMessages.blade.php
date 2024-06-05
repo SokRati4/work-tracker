@@ -5,6 +5,11 @@
         <h2>Wszystkie wysłane wiadomości</h2>
         <div class="row">
             <div class="col-md-12">
+            @if(session('success'))
+            <div class="alert alert-success">
+            {{ session('success') }}
+            </div>
+            @endif
                 @if ($sent_messages->count() > 0) 
                     <ul>
                 @foreach ($sent_messages as $message)

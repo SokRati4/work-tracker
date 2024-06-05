@@ -64,7 +64,7 @@ class MessageController extends Controller
         $message->status = 'sent';
         $message->save();
 
-        return response()->json(['message' => 'Message sent successfully'], 200);
+        return redirect()->route('messages.sentMessages')->with('success', 'Wiadomość została wysłana');
     }
 
     // Lista wysłanych wiadomości
