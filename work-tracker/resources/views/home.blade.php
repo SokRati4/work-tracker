@@ -201,13 +201,13 @@
                                             <div class="col-md-6">
                                                 <div style="text-align: center;">Nowe prośby</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{ $requests_toaccept }}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div style="text-align: center;">Wszystkie prośby</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{ $vacation_requests }}
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +227,7 @@
                                             <div class="col-md-7">
                                                 <div style="text-align: center;">Nadchodzące urlopy</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{$incomming_vacations}}
                                                 </div>
                                                 
                                             </div>
@@ -267,7 +267,7 @@
                                             <div class="col-md-7">
                                                 <div style="text-align: center;">Nadchodzące urlopy</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{$incomming_vacations}}
                                                 </div>
                                                 
                                             </div>
