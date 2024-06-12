@@ -97,6 +97,7 @@ class WorkdayController extends Controller
     }
 
     public function update(Request $request) {
+        // echo $request->input('date'); exit();
         $user = User::find($request->input('user_id'));
         if (!$user) return redirect()->route('employees.index')->with('error', 'Nie można znaleźć użytkownika.');
 
