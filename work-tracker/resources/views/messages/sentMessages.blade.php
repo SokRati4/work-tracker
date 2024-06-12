@@ -52,11 +52,12 @@ p {
     <h2 class="mb-4">Wszystkie wysłane wiadomości</h2>
     <div class="row">
         <div class="col-md-12">
-        @if(session('success'))
-            <div class="alert alert-success">
-            {{ session('success') }}
-            </div>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
             @endif
+
             @if ($sent_messages->count() > 0)
                 <div class="accordion" id="messagesAccordion">
                     @foreach ($sent_messages as $message)
