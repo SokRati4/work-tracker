@@ -132,6 +132,7 @@
                                     </div>
                                 </div>
                         </div>
+                        <input type="hidden" name="id_user" id="id_user" value="{{ $employee->id }}" required>
                         <div class="col-md-3 mx-1">
                                 <div class="dashboard-container box-1 bg-1">
                                     <div class="header-box">
