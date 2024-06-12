@@ -82,4 +82,24 @@ class MessageController extends Controller
         $received_messages = Message::where('id_user_receiver', $user_id)->get();
         return view('messages.receivedMessages', ['received_messages' => $received_messages]);
     }
+    public function markAsRead(Request $request)
+    {
+        $messageId = $request->input('message_id');
+    
+        // Znajdź wiadomość po jej ID
+        $message = Message::find($messageId);
+    
+        // Sprawdź, czy wiadomość istnieje i czy jej status nie jest już "read"
+        if ($message && $message->status !== 'read') {
+            // Zaktualizuj status wiadomości na "read"
+            $message->status = 'read';
+            $message->save();
+    
+            // Zwróć odpowiedź JSON z informacją o sukcesie
+            return response()->json(['success' => true]);
+        }
+    
+        // Jeśli wiadomość nie istnieje lub już jest oznaczona jako "read", zwróć błąd
+        return response()->json(['success' => false], 400);
+    }
 }

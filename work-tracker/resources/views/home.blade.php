@@ -175,10 +175,29 @@
                                 <div class="header-box">
                                     Wiadomości
                                 </div>
+                                <div class="p-3">
+                                    <div class="dashboard-container bg-1 px-5">
+                                        <div class="dashboard-links func-box vertical-center">
+                                            <a href="{{ route('messages.index') }}">Zarządzaj wiadomościami</a>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-md-6">
+                                                <div style="text-align: center;">Nowe wiadomości</div>
+                                                <div class="akcept-box vertical-center">
+                                                    {{ $unread_messages }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div style="text-align: center;">Wszystkie czaty</div>
+                                                <div class="akcept-box vertical-center">
+                                                    {{ $chats }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
 
-                                <div class="m-3">
-                                    X
-                                </div>
                             </div>
                         </div>
                     @endif
@@ -201,13 +220,13 @@
                                             <div class="col-md-6">
                                                 <div style="text-align: center;">Nowe prośby</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{ $requests_toaccept }}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div style="text-align: center;">Wszystkie prośby</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{ $vacation_requests }}
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +246,7 @@
                                             <div class="col-md-7">
                                                 <div style="text-align: center;">Nadchodzące urlopy</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{$incomming_vacations}}
                                                 </div>
                                                 
                                             </div>
@@ -246,17 +265,35 @@
 
                     @if (Auth::user()->role == 1)
                     <div class="col-md-4">
-                    <div class="dashboard-container box-2 bg-1">
+                            <div class="dashboard-container box-2 bg-1">
                                 <div class="header-box">
                                     Wiadomości
                                 </div>
+                                <div class="p-3">
+                                    <div class="dashboard-container bg-1 px-5">
+                                        <div class="dashboard-links func-box vertical-center">
+                                            <a href="{{ route('messages.index') }}">Zarządzaj wiadomościami</a>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-md-6">
+                                                <div style="text-align: center;">Nowe wiadomości</div>
+                                                <div class="akcept-box vertical-center">
+                                                    {{ $unread_messages }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div style="text-align: center;">Wszystkie czaty</div>
+                                                <div class="akcept-box vertical-center">
+                                                    {{ $chats }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
 
-                                <div class="m-3">
-                                    X
-                                </div>
+                            </div>
                         </div>
-                        
-                    </div>
                         
                     <div class="col-md-4">
                     <div class="dashboard-container box-3 bg-1">
@@ -267,7 +304,7 @@
                                             <div class="col-md-7">
                                                 <div style="text-align: center;">Nadchodzące urlopy</div>
                                                 <div class="akcept-box vertical-center">
-                                                    X
+                                                    {{$incomming_vacations}}
                                                 </div>
                                                 
                                             </div>
