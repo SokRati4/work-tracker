@@ -156,7 +156,7 @@
                                                 
                                             </div>
                                             <div class="col-md-9 ">
-                                                <a class="link-color-2" href="{{ url('/home') }}">
+                                                <a class="link-color-2" href="{{ url('{id}/employee') }}">
                                                     <div class="func-box vertical-center" style="font-size: 12px;">
                                                         Nowy pracownik
                                                     </div>

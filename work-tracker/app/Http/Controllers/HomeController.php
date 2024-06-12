@@ -9,6 +9,7 @@ use App\Models\WorkDay;
 use App\Models\User;
 use App\Models\VacationRequest;
 use App\Models\Vacation;
+use App\Models\Message;
 
 
 class HomeController extends Controller
@@ -54,13 +55,22 @@ class HomeController extends Controller
         $incomming_vacations = Vacation::where('id_user',$userId)
             ->where('date_from', '>', $currentDateTime)
             ->count();
-
+        
+        $chats = Message::where('id_user_sender', $userId)
+        ->orWhere('id_user_receiver', $userId)
+        ->distinct('id_thread')
+        ->count('id_thread');
+        $unread_messages = Message::where('status','sent')
+        ->where('id_user_receiver',$userId)
+        ->count();
         return view('home', [
             'totalHours' => $totalHours,
             'toAccept' => $toAccept,
             'vacation_requests' =>$vacation_requests,
             'requests_toaccept' =>$requests_toaccept,
             'incomming_vacations' => $incomming_vacations,
+            'chats' =>$chats,
+            'unread_messages' => $unread_messages,
         ]);
     }
 }

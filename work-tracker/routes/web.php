@@ -34,6 +34,7 @@ Route::middleware([CheckAcceptedMiddleware::class])->group(function () {
     Route::post('/messages/store',[MessageController::class,'store'])->name('messages.store');
     Route::get('/messages/sent', [MessageController::class, 'sentMessages'])->name('messages.sentMessages');
     Route::get('/messages/received', [MessageController::class, 'receivedMessages'])->name('messages.receivedMessages');
+    Route::post('/messages/mark-as-read', [MessageController::class, 'markAsRead'])->name('messages.markAsRead');
 });
 
 Route::middleware([CheckAdministrationMiddleware::class])->group(function () {
